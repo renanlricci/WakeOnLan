@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>WakeOnLan.Api</name>
+    </assembly>
+    <members>
+        <member name="M:WakeOnLan.Api.Infrastruture.Extensions.ApplicationBuilderExtensions.UseSwaggerApplication(Microsoft.AspNetCore.Builder.IApplicationBuilder)">
+            <summary>
+            Habilita o middleware do Swagger como um endpoint em JSON para a utilização da UI.
+            </summary>
+            <param name="applicationBuilder"></param>
+            <returns>IApplicationBuilder</returns>
+        </member>
+        <member name="M:WakeOnLan.Api.Infrastruture.Extensions.ServiceCollectionExtensions.AddSwagger(Microsoft.Extensions.DependencyInjection.IServiceCollection,WakeOnLan.CrossCutting.Configuration.AppSettings)">
+            <summary>
+            Gera o versionamento da documentação para a utilização do Swagger.
+            </summary>
+            <param name="serviceCollection"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WakeOnLan.Api.Infrastruture.Extensions.ServiceCollectionExtensions.AddSwaggerBearerSecurity(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Adiciona ao Swagger a funcionalidade de autenticação via Bearer.
+            </summary>
+            <param name="serviceCollection"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WakeOnLan.Api.Infrastruture.Extensions.ServiceCollectionExtensions.AddBearerAuthentication(Microsoft.Extensions.DependencyInjection.IServiceCollection,WakeOnLan.CrossCutting.Configuration.AppSettings)">
+            <summary>
+            Adiciona ao sistema a autenticação via Bearer.
+            </summary>
+            <param name="serviceCollection"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WakeOnLan.Api.Infrastruture.Extensions.ServiceCollectionExtensions.AddIoC(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            
+            </summary>
+            <param name="serviceCollection"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

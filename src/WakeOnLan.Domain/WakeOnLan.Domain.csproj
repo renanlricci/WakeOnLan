@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Commands\WakeUp\SpecifiedDevice\**" />
+    <EmbeddedResource Remove="Commands\WakeUp\SpecifiedDevice\**" />
+    <None Remove="Commands\WakeUp\SpecifiedDevice\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MediatR" Version="7.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Options" Version="2.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\WakeOnLan.CrossCutting.Configuration\WakeOnLan.CrossCutting.Configuration.csproj" />
+    <ProjectReference Include="..\WakeOnLan.CrossCutting.Exceptions\WakeOnLan.CrossCutting.Exceptions.csproj" />
+  </ItemGroup>
+
+</Project>
