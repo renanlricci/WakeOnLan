@@ -13,7 +13,7 @@ COPY ["WakeOnLan.CrossCutting.Exceptions/WakeOnLan.CrossCutting.Exceptions.cspro
 RUN dotnet restore "./WakeOnLan.Api/WakeOnLan.Api.csproj"
 COPY . .
 WORKDIR /src/WakeOnLan.Api
-RUN dotnet publish "WakeOnLan.Api/WakeOnLan.Api.csproj" -c Debug -o /app
+RUN dotnet publish "WakeOnLan.Api.csproj" -c Debug -o /app
 
 FROM mcr.microsoft.com/dotnet/core/aspnet:2.2 AS base
 WORKDIR /app
