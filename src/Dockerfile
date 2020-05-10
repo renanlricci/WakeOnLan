@@ -20,4 +20,4 @@ WORKDIR /app
 COPY --from=build /app .
 ENTRYPOINT ["dotnet", "WakeOnLan.Api.dll"]
 
-EXPOSE 8080
+EXPOSE 81
