@@ -6,7 +6,4 @@ services:
     build: .
     restart: always
     network_mode: host
-    environment:
-      - "USER=renanlricci"
-      - "PASS=9292"
 
