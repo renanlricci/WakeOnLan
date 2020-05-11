@@ -1,0 +1,12 @@
+version: "3.7"
+
+services:
+  wakeonlan:
+    container_name: wakeonlan-api
+    build: .
+    restart: always
+    network_mode: host
+    environment:
+      - "USER=renanlricci"
+      - "PASS=9292"
+
