@@ -1,10 +1,10 @@
-﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using WakeOnLan.Api.Infrastruture.Extensions;
 using WakeOnLan.CrossCutting.Configuration;
-using System.IO;
 
 namespace WakeOnLan.Api
 {
@@ -12,17 +12,17 @@ namespace WakeOnLan.Api
     {
         public IConfiguration _configuration { get; set; }
 
-        public Startup()
+        public Startup(IConfiguration configuration)
         {
-            _configuration = ConfigurationBuilder();
+            _configuration = configuration;
         }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             var appSettings = _configuration.Get<AppSettings>();
 
-            services.AddMvc();
+            services.AddCors();
+            services.AddControllers();
             services.Configure<AppSettings>(_configuration);
             services
                 .AddSwagger(appSettings)
@@ -31,19 +31,32 @@ namespace WakeOnLan.Api
                 .AddIoC();
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
-            app.UseMvc().UseSwaggerApplication();
-        }
 
-        private static IConfiguration ConfigurationBuilder() =>
-            new ConfigurationBuilder()
-                .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile("appsettings.json").Build();
+            app.UseCors(a => a
+                .AllowAnyOrigin()
+                .AllowAnyHeader()
+                .AllowAnyMethod());
+
+            app.UseHttpsRedirection();
+
+            app.UseRouting();
+
+            app.UseAuthentication();
+
+            app.UseAuthorization();
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+            });
+
+            app.UseSwaggerApplication();
+        }
     }
 }

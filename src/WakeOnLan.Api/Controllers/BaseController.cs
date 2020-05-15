@@ -1,16 +1,15 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using WakeOnLan.Api.Models;
-using WakeOnLan.CrossCutting.Exceptions;
 using Serilog;
 using System;
 using System.Net;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
+using WakeOnLan.Api.Models;
+using WakeOnLan.CrossCutting.Exceptions;
 
 namespace WakeOnLan.Api.Controllers
 {
-    public abstract class BaseController<T> : Controller
+    public abstract class BaseController<T> : ControllerBase
     {
         protected readonly IMediator _mediator;
 
@@ -19,11 +18,13 @@ namespace WakeOnLan.Api.Controllers
             _mediator = mediator;
         }
 
+        private string _clientIpAdrr => HttpContext.Connection.RemoteIpAddress?.ToString() ?? HttpContext.Connection.LocalIpAddress?.ToString();
+
         protected async Task<IActionResult> CreateResponse<T>(Func<Task<T>> function)
         {
             try
             {
-                Log.Information("Request Func({0}) from:{1}", function?.Method?.Name, HttpContext.Request.Headers["X-Forwarded-For"]);
+                Log.Information("Request Func({0}) from:{1}", function?.Method?.Name, _clientIpAdrr);
                 var data = await function();
                 return Response(data);
             }
@@ -47,7 +48,7 @@ namespace WakeOnLan.Api.Controllers
         {
             try
             {
-                Log.Information("Request Func({0}) from:{1}", action?.Method?.Name, HttpContext.Request.Headers["X-Forwarded-For"]);
+                Log.Information("Request Func({0}) from:{1}", action?.Method?.Name, _clientIpAdrr);
                 await action();
                 return Response();
             }
