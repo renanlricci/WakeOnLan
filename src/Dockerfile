@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/dotnet/core/sdk:2.2 AS build
+FROM mcr.microsoft.com/dotnet/core/sdk:3.1 AS build
 ARG buildenv=Docker
 WORKDIR /src
 COPY ["*.sln", "./"]
@@ -15,9 +15,9 @@ COPY . .
 WORKDIR /src/WakeOnLan.Api
 RUN dotnet publish "WakeOnLan.Api.csproj" -c Debug -o /app
 
-FROM mcr.microsoft.com/dotnet/core/aspnet:2.2 AS base
+FROM mcr.microsoft.com/dotnet/core/aspnet:3.1 AS base
 WORKDIR /app
 COPY --from=build /app .
 ENTRYPOINT ["dotnet", "WakeOnLan.Api.dll"]
 
-EXPOSE 81
+EXPOSE 80
