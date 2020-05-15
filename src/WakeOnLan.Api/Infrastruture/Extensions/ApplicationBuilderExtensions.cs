@@ -10,9 +10,7 @@ namespace WakeOnLan.Api.Infrastruture.Extensions
             applicationBuilder.UseSwagger();
             applicationBuilder.UseSwaggerUI(x =>
             {
-                x.SwaggerEndpoint(
-                    "/swagger/v1/swagger.json",
-                    "Renan Ricci - WakeOnLan API");
+                x.SwaggerEndpoint("/swagger/v1/swagger.json", "WakeOnLan API");
                 x.DocExpansion(DocExpansion.None);
             });
             return applicationBuilder;

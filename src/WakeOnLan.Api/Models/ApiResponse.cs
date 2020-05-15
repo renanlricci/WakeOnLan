@@ -12,9 +12,7 @@
             Success = true;
         }
 
-        protected ApiResponse(
-            object data,
-            bool success)
+        protected ApiResponse(object data, bool success)
         {
             Data = data;
             Success = success;

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace WakeOnLan.Api.Controllers
 {
+    [ApiController]
     [Authorize("Bearer")]
     [Route("api/WakeUp")]
     public class WakeUpController : BaseController<WakeUpController>
@@ -14,7 +15,8 @@ namespace WakeOnLan.Api.Controllers
         {
         }
 
-        [HttpPost("Main")]
+        [HttpPost]
+        [Route("")]
         public async Task<IActionResult> WakeUpMainAsync() => await CreateResponse(async () => await _mediator.Send(new WakeUpMainCommand()));
     }
 }

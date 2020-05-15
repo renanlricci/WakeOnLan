@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace WakeOnLan.Api.Controllers
 {
+    [ApiController]
     [Authorize("Bearer")]
     [Route("api/Ping")]
     public class PingController : BaseController<PingController>
@@ -14,7 +15,8 @@ namespace WakeOnLan.Api.Controllers
         {
         }
 
-        [HttpPost("Main")]
+        [HttpPost]
+        [Route("Main")]
         public async Task<IActionResult> PingMainAsync() => await CreateResponse(async () => await _mediator.Send(new PingMainDeviceCommand()));
     }
 }
